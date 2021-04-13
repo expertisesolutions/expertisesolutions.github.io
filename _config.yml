@@ -4,7 +4,7 @@
 title: Expertise Solutions
 
 # Short description of your site
-description: Expertise Solutions's blog
+description: Expertise Solutions\'s blog
 
 # Your name to show in the footer
 author: Felipe Magno de Almeida
@@ -21,14 +21,14 @@ navbar-links:
 
 # Image to show in the navigation bar - works best with a square image
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/assets/img/avatar-icon.png"
+#avatar: "/assets/img/logo.png"
 
 # By default, the image is cut into a circle. You can disable this behaviour here.
-round-avatar: true
+#round-avatar: true
 
 # If you want to have an image logo in the top-left corner instead of the title text,
 # then specify the following parameter
-#title-img: /path/to/image
+title-img: "/assets/img/logo.png"
 
 
 # --- Footer options --- #
@@ -185,7 +185,7 @@ defaults:
       path: "" # all files
     values:
       layout: "page"
-      show-avatar: true
+      #show-avatar: true
 
 # Exclude these files from production site
 exclude:
