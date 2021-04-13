@@ -4,9 +4,6 @@ title:  "Compiling Wayland Protocol"
 date:   2021-04-12 17:30:14 -0300
 categories: 
 ---
-
-# Introduction
-
 We're developing our own Wayland Compositor, and we noticed most
 projects just use libwayland-server. However, we want more control
 over the on-the-write protocol I/O and better integration with our C++
