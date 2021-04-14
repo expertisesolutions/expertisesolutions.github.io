@@ -3,8 +3,8 @@ layout: post
 title:  "Using C++14 STL with 8-bits microcontrollers"
 date:   2021-04-14 11:20:47 -0300
 categories: gcc avr arduino embedded microcontroller
-image: "/assets/img/2021-04-14 Use temporary int objects to access struct tm members.png"
-share-img: "/assets/img/2021-04-14 Use temporary int objects to access struct tm members.png"
+image: "/assets/img/2021-04-14-Use-temporary-int-objects-to-access-struct-tm-members.png"
+share-img: "/assets/img/2021-04-14-Use-temporary-int-objects-to-access-struct-tm-members.png"
 author: Felipe Magno de Almeida
 ---
 
