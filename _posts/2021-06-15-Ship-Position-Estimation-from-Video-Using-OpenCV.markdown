@@ -3,8 +3,8 @@ layout: post
 title:  "Ship Position Estimation from Video using OpenCV"
 date:   2021-06-15 16:30:00 -0300
 categories: opencv detection tracking computer-vision pose-estimation camera-estimation blender python
-image: "/assets/img/2021-06-20-Ship-Position-Estimation-from-Video-Using-OpenCV.png"
-share-img: "/assets/img/2021-06-20-Ship-Position-Estimation-from-Video-Using-OpenCV.png" 
+image: "/assets/img/2021-06-15-Ship-Position-Estimation-from-Video-Using-OpenCV.png"
+share-img: "/assets/img/2021-06-15-Ship-Position-Estimation-from-Video-Using-OpenCV.png" 
 author: João Antônio Cardoso
 ---
 
