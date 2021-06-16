@@ -115,6 +115,19 @@ for t in range(len(trackers)):
       if bodies[b] not in tracker_correspondency:
         tracker_correspondency[t] = bodies[b]
         break
+
+# Update all trackers
+for t, tracker in enumerate(trackers):
+  bbox = tracker_correspondency[t]
+  trackers[t][1] = bbox
+
+# Add new detected bodies
+for bbox in bodies:
+  if bbox not in tracker_correspondency:
+      tracker_id = last_id + 1
+      tracker = [tracker_id, bbox]
+      trackers.append(tracker)
+      last_id = tracker_id
 ```
 
 The metric used here is the Intersection over Union (see
