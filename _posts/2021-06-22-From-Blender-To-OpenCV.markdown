@@ -46,7 +46,7 @@ rotation-translation matrix to represent the pose of the object/camera. It is
 defined by a *rotation matrix* `R` and a *translation vector* `T`, both 
 concatenated in a form of a `[R|T]` matrix. 
 
-For cameras, if the `[R|T]` matrix is further concatenated with the intrinsic 
+For cameras, if the `[R|T]` matrix is further multiplied by the intrinsic 
 parameters, we call it a _projection matrix_, so it feels very convenient and
 compact form to organize the information.
 
@@ -206,4 +206,3 @@ Finally, by seeing how easy is to write Python code inside Blender using its
 great API, and how simple it can be to integrate it with other tools, we can 
 imagine countless solutions benefiting from this kind of combination of 
 tools!
-
