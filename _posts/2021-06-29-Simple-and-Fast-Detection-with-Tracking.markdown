@@ -65,8 +65,8 @@ box area:
 ```python
 # This can be initialized outside the processing loop
 detector = cv2.createBackgroundSubtractorMOG2(history=150, varThreshold=50)
-self.erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
-self.dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
 
 # Here we start the pipeline
 mask = detector.apply(frame)
@@ -86,8 +86,8 @@ for countour in contours:
   # Calculate area and remove small elements
   area = cv2.contourArea(countour)
   if area > 1500 and area < 100000:
-  x, y, w, h = cv2.boundingRect(countour)
-  bodies += [(x, y, w, h)]
+    x, y, w, h = cv2.boundingRect(countour)
+    bodies += [(x, y, w, h)]
 ```
 
 Using the above pipeline inside the video processing loop and drawing each `body
