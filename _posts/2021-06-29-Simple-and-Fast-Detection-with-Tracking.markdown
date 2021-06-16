@@ -101,7 +101,6 @@ simply relate the detections from the last frame with the detections from the
 current frame by just using a threshold of some euclidean distance metric.
 
 ```python
-
 # This can be initialized in the class instantiation
 trackers = list()
 metric_threshold = 0.2
