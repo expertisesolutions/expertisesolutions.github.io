@@ -153,7 +153,7 @@ Another technique we can apply here is to search for ships only in the port
 channel, and we can do this by masking with [OpenCV's bitwise operations like
 `bitwise_and`](https://docs.opencv.org/master/d2/de8/group__core__array.html#ga60b4d04b251ba5eb1392c34425497e14):
 
-```
+```python
 # Describe each vertice
 vertices = np.array([
 	 [500, 190], # top left
