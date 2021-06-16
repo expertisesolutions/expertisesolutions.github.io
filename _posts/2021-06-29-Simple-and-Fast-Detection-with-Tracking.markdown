@@ -64,12 +64,9 @@ box area:
 
 ```python
 # This can be initialized outside the processing loop
-detector = cv2.createBackgroundSubtractorMOG2(
-	 history=150, varThreshold=50)
-self.erode_kernel = cv2.getStructuringElement(
-	 cv2.MORPH_ELLIPSE, (3, 3))
-self.dilate_kernel = cv2.getStructuringElement(
-	 cv2.MORPH_ELLIPSE, (7, 7))
+detector = cv2.createBackgroundSubtractorMOG2(history=150, varThreshold=50)
+self.erode_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+self.dilate_kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
 
 # Here we start the pipeline
 mask = detector.apply(frame)
@@ -81,16 +78,16 @@ frame = cv2.bitwise_and(frame, frame, mask=mask)
 
 # Get each blob contour
 contours, hierarchy = cv2.findContours(
-	 mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+  mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
 # Find the bounding box for each detected blob:
 bodies = []
 for countour in contours:
-	 # Calculate area and remove small elements
-	 area = cv2.contourArea(countour)
-	 if area > 1500 and area < 100000:
-	 x, y, w, h = cv2.boundingRect(countour)
-	 bodies += [(x, y, w, h)]
+  # Calculate area and remove small elements
+  area = cv2.contourArea(countour)
+  if area > 1500 and area < 100000:
+  x, y, w, h = cv2.boundingRect(countour)
+  bodies += [(x, y, w, h)]
 ```
 
 Using the above pipeline inside the video processing loop and drawing each `body
@@ -113,12 +110,12 @@ metric_threshold = 0.2
 # Map the correspondency between the new bodies and the trackers:
 tracker_correspondency = list([None] * len(trackers))
 for t in range(len(trackers)):
-	 for b in range(len(bodies)):
-	 	 metric = compute_iou(trackers[t].bbox, bodies[b])
-	 	 if metric > metric_threshold:
-	 	 	 if bodies[b] not in tracker_correspondency:
-	 	 	 tracker_correspondency[t] = bodies[b]
-	 	 	 break
+  for b in range(len(bodies)):
+    metric = compute_iou(trackers[t].bbox, bodies[b])
+    if metric > metric_threshold:
+      if bodies[b] not in tracker_correspondency:
+        tracker_correspondency[t] = bodies[b]
+        break
 ```
 
 The metric used here is the Intersection over Union (see
@@ -127,21 +124,21 @@ distance between centroids:
 
 ```python
 def compute_iou(rect_a, rect_b) -> float:
-	 """ rect_a and rect_b: [x, y, w, h]
-	 return: intersection over area (iou)
-	 reference: http://jsfiddle.net/Lqh3mjr5/ """
-	 
-	 xa1, xa2 = rect_a[0], rect_a[0] + rect_a[2]
-	 ya1, ya2 = rect_a[1], rect_a[1] + rect_a[3]
-	 xb1, xb2 = rect_b[0], rect_b[0] + rect_b[2]
-	 yb1, yb2 = rect_b[1], rect_b[1] + rect_b[3]
-	 area_i = max(0, min(xa2, xb2) - max(xa1, xb1)) * max(0, min(ya2, yb2) - max(ya1, yb1))
-	 
-	 area_a = rect_a[2] * rect_a[3]
-	 area_b = rect_b[2] * rect_b[3]
-	 
-	 area_u = area_a + area_b - area_i
-	 return area_i / area_u
+  """ rect_a and rect_b: [x, y, w, h]
+  return: intersection over area (iou)
+  reference: http://jsfiddle.net/Lqh3mjr5/ """
+  
+  xa1, xa2 = rect_a[0], rect_a[0] + rect_a[2]
+  ya1, ya2 = rect_a[1], rect_a[1] + rect_a[3]
+  xb1, xb2 = rect_b[0], rect_b[0] + rect_b[2]
+  yb1, yb2 = rect_b[1], rect_b[1] + rect_b[3]
+  area_i = max(0, min(xa2, xb2) - max(xa1, xb1)) * max(0, min(ya2, yb2) - max(ya1, yb1))
+  
+  area_a = rect_a[2] * rect_a[3]
+  area_b = rect_b[2] * rect_b[3]
+  
+  area_u = area_a + area_b - area_i
+  return area_i / area_u
 ```
 
 Note that if occlusion occurs, it could, wrongly, swap the targets! But keep
@@ -156,11 +153,11 @@ channel, and we can do this by masking with [OpenCV's bitwise operations like
 ```python
 # Describe each vertice
 vertices = np.array([
-	 [500, 190], # top left
-	 [575, 190], # top right
-	 [535, 720], # bottom right
-	 [0, 720], # bottom left
-	 [0, 520], # middle left
+  [500, 190], # top left
+  [575, 190], # top right
+  [535, 720], # bottom right
+  [0, 720], # bottom left
+  [0, 520], # middle left
 ], np.int32)
 vertices = vertices.astype(np.int32).reshape((-1, 1, 2))
 
