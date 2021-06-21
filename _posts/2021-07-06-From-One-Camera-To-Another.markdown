@@ -10,15 +10,15 @@ author: João Antônio Cardoso
 
 In this post, we will take a look at how to do a satellite or ‘top’ view (similar to bird-eyes) and with the same technique, how to estimate the position of a detected object. If you are new here, [take a look at our first post of this series, which is an overview of this particular case that we will be working on here](/2021-06-15-Ship-Position-Estimation-from-Video-Using-OpenCV).
 
-To better contextualize, let’s summarize what we have so far, and link the posts where we see the relevant details of that specific part:
-an accelerated video from a perspective camera filming the Miami Port, from YouTube channel [BroadwaveLiveCams](https://www.youtube.com/channel/UC6RbL0ZAyA_rc__Acbqh2mw);
-an estimated pose and camera calibration, aka extrinsic and intrinsic parameters (see [Ship Position Estimation from Video Using OpenCV](/2021-06-15-Ship-Position-Estimation-from-Video-Using-OpenCV));
-we got those camera parameters on Blender and OpenCV (see [From Blender to OpenCV](/2021-06-22-From-Blender-To-OpenCV));
-an OpenCV algorithm detecting and tracking ships on the video (see [Simple and Fast Detection with Tracking](/2021-06-29-Simple-and-Fast-Detection-with-Tracking)).
+To better contextualize, let’s summarize what we have so far, and link the posts where we see the relevant details of that specific part:  
+  - an accelerated video from a perspective camera filming the Miami Port, from YouTube channel [BroadwaveLiveCams](https://www.youtube.com/channel/UC6RbL0ZAyA_rc__Acbqh2mw);
+  - an estimated pose and camera calibration, aka extrinsic and intrinsic parameters (see [Ship Position Estimation from Video Using OpenCV](/2021-06-15-Ship-Position-Estimation-from-Video-Using-OpenCV));
+  - we got those camera parameters on Blender and OpenCV (see [From Blender to OpenCV](/2021-06-22-From-Blender-To-OpenCV));
+  - an OpenCV algorithm detecting and tracking ships on the video (see [Simple and Fast Detection with Tracking](/2021-06-29-Simple-and-Fast-Detection-with-Tracking)).
 
-From that, I would like to make it clear what we want here:
-the ship’s position on the water plane as a coordinate;
-the ship’s position as a point in both the perspective camera and the satellite image, which we call our top-view/satellite camera.
+From that, I would like to make it clear what we want here:  
+  - the ship’s position on the water plane as a coordinate;
+  - the ship’s position as a point in both the perspective camera and the satellite image, which we call our top-view/satellite camera.
 
 Although we are showing real code snippets here, this isn’t supposed to be a tutorial, so I should advise you to be prepared to grasp some details, like how the Blender project is structured, from code, or from zooming the images from other posts. But if you have any questions, we would be happy to answer them!
 
@@ -28,9 +28,9 @@ How can we project points from one camera to a second camera?
 
 The truth is that it is not always easy or even possible, but fortunately, in our case, it is: as argued by [this answer on StackOverflow](https://stackoverflow.com/a/43565754/3850957), we can consider the following: if our points reside in a plane and if our cameras are calibrated (we know their intrinsic and extrinsic parameters), we can simply find a [Homography Matrix](https://docs.opencv.org/master/d9/dab/tutorial_homography.html#:~:text=Briefly%2C%20the%20planar%20homography%20relates%20the%20transformation%20between%20two%20planes%20(up%20to%20a%20scale%20factor)%3A)) between them, that can translate the points from one camera to another.
 
-Before doing that, we need to do two things first:
-Generate (on Blender) and export our reference points for both cameras
-Load the exported data and the reference images
+Before doing that, we need to do two things first:  
+  - generate (on Blender) and export our reference points for both cameras;
+  - load the exported data and the reference images.
 
 ### Generating and exporting from Blender
 In the past, we already covered [how to export cameras and objects from Blender to OpenCV](/2021-06-22-From-Blender-To-OpenCV), so here we will focus on generating the cubes and exporting the projected pixel coordinate to both cameras.
@@ -145,12 +145,11 @@ def get_obj_centroid_from_camera(scene, cam_name, coord):
   return point
 ```
 
-
-Now we should have the necessary data to work on the OpenCV side:
-Both images
-Global location of the boxes’ centroids
-Projected centroids to both cameras
-Intrinsic and Extrinsic camera parameters
+Now we should have the necessary data to work on the OpenCV side:  
+  - both images;
+  - global location of the boxes’ centroids;
+  - projected centroids to both cameras;
+  - intrinsic and Extrinsic camera parameters.
 
 ### Loading the necessary data
 
@@ -228,12 +227,10 @@ projectedSatPoints = cv.perspectiveTransform(
 
 # Finding real-world ship position
 
-Now, using the same principles, we can find the homography matrix between an arbitrary plane: here, the water plane, and its coordinates will match their physical coordinate relative to the camera:
-
-Describe the water plane with at least 4 points
-Project those points to the main camera
-Find homography between the water plane points and the projected ones
-apply
+Now, using the same principles, we can find the homography matrix between an arbitrary plane: here, the water plane, and its coordinates will match their physical coordinate relative to the camera:  
+  - describe the water plane with at least 4 points;
+  - project those points to the main camera;
+  - find homography between the water plane points and the projected ones.
 
 ```python
 pts_water_plane = np.float32([
@@ -247,6 +244,8 @@ pts_on_camera, _ = cv2.projectPoints(
 )
 floorHomographyMatrix, _ = cv2.findHomography(pts_on_camera, pts_water_plane)
 ```
+
+Finally, we apply the transformation:
 
 ```python
 # Suppose points_to_project is the points you want to know the 
