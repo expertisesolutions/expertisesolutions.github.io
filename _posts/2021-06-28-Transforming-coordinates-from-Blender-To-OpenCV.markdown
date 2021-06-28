@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "From Blender to OpenCV"
+title:  "Transforming coordinates from Blender to OpenCV"
 date:   2021-06-28 15:47:48 -0300
 categories: opencv detection tracking computer-vision pose-estimation camera-estimation blender python
 image: "/assets/img/2021-06-22-from-Blender-to-OpenCV-cover.png"
