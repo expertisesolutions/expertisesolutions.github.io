@@ -1,16 +1,16 @@
 ---
 layout: post
 title:  "Simple and Fast Detection with Tracking"
-date:   2021-06-29 10:00:00 -0300
+date:   2021-08-17 10:00:00 -0300
 categories: opencv detection tracking computer-vision python
-image: "/assets/img/2021-06-29-detection-using-background-subtraction-cover.png"
-share-img: "/assets/img/2021-06-29-detection-using-background-subtraction-cover.png"
+image: "/assets/img/2021-08-17-detection-using-background-subtraction-cover.png"
+share-img: "/assets/img/2021-08-17-detection-using-background-subtraction-cover.png"
 author: João Antônio Cardoso
 ---
 
 In the past few posts (see
 [1](/2021-06-15-Ship-Position-Estimation-from-Video-Using-OpenCV) and
-[2](/2021-06-22-From-Blender-To-OpenCV.markdown)) we briefly described some
+[2](/2021-06-28-Transforming-coordinates-from-Blender-To-OpenCV)) we briefly described some
 details on how we estimated a ship's position, using a single video. This post
 will further detail *our simplistic approach to object detection and tracking*
 for this application. If you haven't read the previous posts, I strongly
@@ -92,7 +92,7 @@ for countour in contours:
 
 Using the above pipeline inside the video processing loop and drawing each `body
 in bodies` will give you something like this:
-![](/assets/img/2021-06-29-detection-using-background-subtraction.png)
+![](/assets/img/2021-08-17-detection-using-background-subtraction.png)
 
 # The simple tracking:
 
@@ -181,7 +181,7 @@ frame = cv2.bitwise_and(frame, frame, mask=mask)
 ```
 
 The mask can be seen in the following image:
-![](/assets/img/2021-06-29-masking.png)
+![](/assets/img/2021-08-17-masking.png)
 
 # Conclusion
 
