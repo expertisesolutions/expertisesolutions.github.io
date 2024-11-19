@@ -116,7 +116,7 @@ gtm: "GTM-K8JGDVHG"
 # --- Comments --- #
 
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
-disqus: "expertise-solutions"
+#disqus: "expertise-solutions"
 
 # To use Facebook Comments, fill in a Facebook App ID
 #fb_comment_id: ""
@@ -177,7 +177,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      comments: true  # add comments to all blog posts
+      comments: false  # add comments to all blog posts
       social-share: true # add social media sharing buttons to all blog posts
       readtime: false # add estimated reading time on all blog posts
   -
